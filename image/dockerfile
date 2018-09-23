@@ -20,12 +20,11 @@ ENV APACHE_PID_FILE /var/run/apache2.pid
 
 RUN mkdir /servidor
 WORKDIR /servidor
-COPY ./install.php /servidor/install.php
-RUN php /servidor/install.php install
 
-
-CMD php /servidor/install.php
+EXPOSE 80 443
 COPY ./composer.phar /servidor/composer.phar
 RUN chmod +x  /servidor/composer.phar
-RUN apt-get update && apt-get upgrade -y && apt-get -y install git php-zip unzip 
-EXPOSE 80 443
+RUN apt-get update && apt-get upgrade -y && apt-get -y install git php7.1-zip unzip 
+COPY ./install.php /servidor/install.php
+RUN php /servidor/install.php install
+CMD php /servidor/install.php
