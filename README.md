@@ -17,7 +17,7 @@ If you desire keep up after restart the host, you need change the file `docker-c
 
 The project include the file `alias.sh`, that include some aliases to simple your life. The alias are:
 
-| Plugin | README |
+| Command | Description |
 | ------ | ------ |
 | php | A alias to command php inside image, but before set this alias, the bash script check if a php command exist in the host |
 | composer | A alias to file composer.phar inside image, but before set this alias, the bash script check if a composer command exist in the host  |
