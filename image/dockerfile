@@ -1,0 +1,31 @@
+FROM ubuntu:16.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get -y install python-software-properties software-properties-common apt-utils
+RUN touch /etc/apt/sources.list.d/ondrej-php.list
+RUN echo "deb http://ppa.launchpad.net/ondrej/php/ubuntu xenial main" >> /etc/apt/sources.list.d/ondrej-php.list
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 4F4EA0AAE5267A6C
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get -y install apache2 php7.1
+RUN apt-get -y install php7.1-gd php7.1-json php7.1-xml php7.1-mbstring php7.1-mcrypt php7.1-mysql php7.1-ldap
+RUN a2enmod ssl rewrite
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_LOCK_DIR /var/lock/apache2
+ENV APACHE_PID_FILE /var/run/apache2.pid
+
+RUN mkdir /servidor
+WORKDIR /servidor
+COPY ./install.php /servidor/install.php
+RUN php /servidor/install.php install
+
+
+CMD php /servidor/install.php
+COPY ./composer.phar /servidor/composer.phar
+RUN chmod +x  /servidor/composer.phar
+RUN apt-get update && apt-get upgrade -y && apt-get -y install git php-zip unzip 
+EXPOSE 80 443

@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    php71:
+        build: ./image
+        image: php:7.1
+        hostname: 'localhost'
+        links:
+            - db:db
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+            - './www:/var/www/html/'
+            - './apache2/:/etc/apache2/'
+            - './php/:/etc/php/'
+            - './log/:/var/log/apache2/'
+        tty: true
+    db:
+        image: mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: senha
+        volumes:
+            - './mysql:/var/lib/mysql'
+        ports:
+            - '3306:3306'
+        tty: true
