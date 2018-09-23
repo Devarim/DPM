@@ -9,7 +9,7 @@ fi
 
 if [ ! -x "$(command -v composer)" ]; then
 	function composer() {
-		docker-compose -f $DPM_BASEDIR/docker-compose.yml exec php71 /servidor/composer.phar "$@"
+		docker-compose -f $DPM_BASEDIR/docker-compose.yml exec --user composer php71 /servidor/composer.phar "$@"
 	}
 	
 fi
