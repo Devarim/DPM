@@ -1,7 +1,9 @@
 <?php
 
 function imprimir($mensagem) {
-	echo($mensagem."\n");
+	$msg = date('Y-m-d H:i:s - ').$mensagem."\n";
+	echo($msg);
+	file_put_contents('/var/log/apache2/docker.php',$msg,FILE_APPEND);
 }
 
 
@@ -27,3 +29,4 @@ if( isset($argv[1]) && $argv[1] == "install" ) {
 
 	system("/usr/sbin/apache2ctl -D FOREGROUND");
 }
+
