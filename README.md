@@ -20,6 +20,7 @@ The project include the file `alias.sh`, that include some aliases to simple you
 | Plugin | README |
 | ------ | ------ |
 | php | A alias to command php inside image, but before set this alias, the bash script check if a php command exist in the host |
+| composer | A alias to file composer.phar inside image, but before set this alias, the bash script check if a composer command exist in the host  |
 | bash_php | Access bash of container php, possibility change some configurations |
 | bash_mysql | Access bash of container mysql, possibility change some configurations |
 
